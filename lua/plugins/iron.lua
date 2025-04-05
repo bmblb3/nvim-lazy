@@ -2,56 +2,46 @@ return {
   "hkupty/iron.nvim",
   config = function(plugins, opts)
     local iron = require("iron.core")
+    local view = require("iron.view")
+    local common = require("iron.fts.common")
 
     iron.setup({
       config = {
-        -- Whether a repl should be discarded or not
+        highlight_last = "IronLastSent",
         scratch_repl = true,
-        -- Your repl definitions come here
         repl_definition = {
+          sh = {
+            command = { "bash" },
+          },
           python = {
-            -- Can be a table or a function that
-            -- returns a table (see below)
-            command = { "python" },
+            command = { "ipython", "--no-autoindent" },
+            format = common.bracketed_paste_python,
             block_dividers = { "# %%", "#%%" },
           },
         },
-        -- How the repl window will be displayed
-        -- See below for more information
-        repl_open_cmd = require("iron.view").right("40%"),
+        repl_open_cmd = view.split.vertical.belowright(0.4),
       },
-      -- Iron doesn't set keymaps by default anymore.
-      -- You can set them here or manually add keymaps to the functions in iron.core
       keymaps = {
-        toggle_repl = "<space>rr",
-        restart_repl = "<space>rt",
-        send_motion = "<space>rc",
-        visual_send = "<space>rc",
-        send_file = "<space>rf",
-        send_line = "<space>rl",
-        send_paragraph = "<space>rp",
-        send_mark = "<space>rm",
-        mark_motion = "<space>rmc",
-        mark_visual = "<space>rmc",
-        remove_mark = "<space>rmd",
-        cr = "<space>r<cr>",
-        interrupt = "<space>r<space>",
-        exit = "<space>rq",
-        clear = "<space>rx",
-        send_until_cursor = "<space>ru",
-        send_code_block = "<space>rb",
-        send_code_block_and_move = "<space>rn",
+        toggle_repl = "<leader>rr",
+        restart_repl = "<leader>rt",
+        send_motion = "<leader>rc",
+        visual_send = "<leader>rc",
+        send_file = "<leader>rf",
+        send_line = "<leader>rl",
+        send_paragraph = "<leader>rp",
+        send_mark = "<leader>rm",
+        mark_motion = "<leader>rmc",
+        mark_visual = "<leader>rmc",
+        remove_mark = "<leader>rmd",
+        cr = "<leader>r<cr>",
+        interrupt = "<leader>r<leader>",
+        exit = "<leader>rq",
+        clear = "<leader>rx",
+        send_until_cursor = "<leader>ru",
+        send_code_block = "<leader><leader>",
+        send_code_block_and_move = "<leader>rn",
       },
-      -- If the highlight is on, you can change how it looks
-      -- For the available options, check nvim_set_hl
-      highlight = {
-        italic = true,
-      },
-      ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
+      ignore_blank_lines = true,
     })
-
-    -- iron also has a list of commands, see :h iron-commands for all available commands
-    vim.keymap.set("n", "<space>rF", "<cmd>IronFocus<cr>")
-    vim.keymap.set("n", "<space>rH", "<cmd>IronHide<cr>")
   end,
 }
