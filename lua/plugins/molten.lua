@@ -16,6 +16,7 @@ return {
     map("n", "<leader>rn", ":MoltenNext<CR>", "GoTo Next")
     map("n", "<leader>rp", ":MoltenPrev <CR>", "GoTo Prev")
     map("n", "<leader>rs", ":MoltenRestart! <CR>", "Reset")
+    map("n", "<leader>ro", ":noautocmd MoltenEnterOutput<CR>", "show/enter output")
 
     -- Visual mode mapping (only once)
     map("v", "<leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", "Evaluate visual selection")
