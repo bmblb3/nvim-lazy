@@ -2,7 +2,9 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local map = vim.keymap.set
+local map = function(mode, lhs, rhs, desc)
+  vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
+end
 
 local function add_line_to_quickfix()
   local file = vim.fn.expand("%:p")
@@ -12,4 +14,5 @@ local function add_line_to_quickfix()
   print("Added current line to quickfix")
 end
 
-map("n", "<leader>xa", add_line_to_quickfix, { noremap = true, silent = true, desc = "Add line to quickfix list" })
+map("n", "<leader>xa", add_line_to_quickfix, "Add line to quickfix list")
+map("t", "<Esc><Esc>", "<C-\\><C-n>", "Exit term mode to normal mode")
