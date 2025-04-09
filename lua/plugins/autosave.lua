@@ -15,7 +15,7 @@ return {
       exists = true,
       modifiable = true,
       filename_is_not = {},
-      filetype_is_not = {},
+      filetype_is_not = { "gitcommit" },
     },
     write_all_buffers = false,
     debounce_delay = 135,
