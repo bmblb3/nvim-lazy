@@ -8,5 +8,15 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
 vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
   command = "set formatoptions-=cro",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    vim.api.nvim_create_user_command("AkCleanCells", function()
+      vim.cmd([[silent! %s!\n*#\s*%%\n*!\r\r# %%\r!g]])
+    end, {})
+  end,
 })
