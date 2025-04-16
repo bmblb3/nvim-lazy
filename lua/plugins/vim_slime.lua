@@ -49,26 +49,29 @@ return {
     end
     map("n", "<leader>rp", move_to_prev_cell_delimiter_or_nothing, "Go to prev cell")
 
-    local move_to_next_cell_delimiter_full_line_match_or_nothing = function()
+    local move_to_next_cell_delimiter_or_insert = function()
       local cell_delimiter = vim.b.slime_cell_delimiter or vim.g.slime_cell_delimiter
       if not cell_delimiter or cell_delimiter == "" then
         return
       end
       local delim_line = vim.fn.search(cell_delimiter .. "$", "nW")
+      local last_line = vim.fn.line("$")
       if delim_line > 0 then
-        vim.api.nvim_win_set_cursor(0, { delim_line + 1, 0 })
+        local gotoline = math.min(delim_line + 1, last_line)
+        vim.api.nvim_win_set_cursor(0, { gotoline, 0 })
+        return
       end
+      -- Insert #%% at the end of the file and move cursor to new line below
+      vim.fn.append(last_line, "")
+      vim.fn.append(last_line + 1, "#%%")
+      vim.fn.append(last_line + 2, "")
+      vim.api.nvim_win_set_cursor(0, { last_line + 3, 0 })
     end
-    map(
-      "n",
-      "<leader>rN",
-      move_to_next_cell_delimiter_full_line_match_or_nothing,
-      "Go to next cell (full line delimited)"
-    )
+    map("n", "<leader>rN", move_to_next_cell_delimiter_or_insert, "Go to next cell (full line delimited)")
 
     map("n", "<leader>rr", function()
       vim.fn["slime#send_cell"]()
-      move_to_next_cell_delimiter_full_line_match_or_nothing()
+      move_to_next_cell_delimiter_or_insert()
     end, "Send cell and go to next")
   end,
 }
