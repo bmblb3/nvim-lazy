@@ -8,7 +8,7 @@ return {
       providers = {
         supermaven = {
           kind = "Supermaven",
-          score_offset = 1,
+          score_offset = -1,
           async = true,
         },
       },
