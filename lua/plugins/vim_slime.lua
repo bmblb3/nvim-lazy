@@ -6,7 +6,8 @@ return {
     vim.g.slime_cell_delimiter = "# %%"
     vim.g.slime_bracketed_paste = 1
     vim.g.slime_no_mappings = 1
-    vim.g.slime_default_config = { session_id = "current", relative_pane = "right" }
+    vim.g.slime_default_config = { session_id = "current", relative_pane = "right", relative_move_back = "left" }
+    vim.g.slime_dont_ask_default = 1
 
     local map = function(mode, lhs, rhs, desc)
       vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
