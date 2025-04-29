@@ -15,9 +15,12 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
   callback = function()
-    vim.api.nvim_create_user_command("AkCleanCells", function()
-      vim.cmd([[silent! %s!\n*#\s*\(%%.*$\)\n*!\r\r# \1\r!g]])
-      vim.cmd([[silent! noh]])
-    end, {})
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = 0,
+      callback = function()
+        vim.cmd([[silent! %s!\n*#\s*\(%%.*$\)\n*!\r\r# \1\r!g]])
+        vim.cmd([[silent! noh]])
+      end,
+    })
   end,
 })
