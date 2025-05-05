@@ -18,8 +18,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = 0,
       callback = function()
-        vim.cmd([[silent! %s!\n*#\s*\(%%.*$\)\n*!\r\r# \1\r!g]])
+        local cursor_pos = vim.api.nvim_win_get_cursor(0)
+        vim.cmd([[keepjumps keeppatterns silent! %s!\n*#\s*\(%%.*$\)\n*!\r\r# \1\r!g]])
         vim.cmd([[silent! noh]])
+        vim.api.nvim_win_set_cursor(0, cursor_pos)
       end,
     })
   end,
