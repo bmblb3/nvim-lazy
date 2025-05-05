@@ -62,9 +62,9 @@ return {
         vim.api.nvim_win_set_cursor(0, { gotoline, 0 })
         return
       end
-      -- Insert #%% at the end of the file and move cursor to new line below
+      -- Insert # %% at the end of the file and move cursor to new line below
       vim.fn.append(last_line, "")
-      vim.fn.append(last_line + 1, "#%%")
+      vim.fn.append(last_line + 1, "# %%")
       vim.fn.append(last_line + 2, "")
       vim.api.nvim_win_set_cursor(0, { last_line + 3, 0 })
     end
