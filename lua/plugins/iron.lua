@@ -25,8 +25,9 @@ return {
         restart_repl = "<leader>r.",
         send_code_block = "<leader><leader>",
         send_code_block_and_move = "<leader>rr",
-        send_motion = "<leader>rm",
-        visual_send = "<leader>r",
+        visual_send = "<leader><leader>",
+        mark_visual = "<leader>rv",
+        send_mark = "<leader>rm",
       },
       ignore_blank_lines = true,
     })
