@@ -6,16 +6,16 @@ return {
         enable = true,
         lookahead = true,
         keymaps = {
-          ["ae"] = "@cell.outer",
+          ["a#"] = "@cell.outer",
         },
       },
       move = {
         enable = true,
         goto_next_start = {
-          ["]e"] = "@cell.start",
+          ["]#"] = "@cell.start",
         },
         goto_previous_start = {
-          ["[e"] = "@cell.start",
+          ["[#"] = "@cell.start",
         },
       },
     },
